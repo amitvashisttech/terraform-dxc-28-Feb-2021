@@ -1,14 +1,19 @@
-# Configure a Cloud Provider
-provider "aws" {
-  region = "us-east-1"
+provider "azurerm" {
+  subscription_id = "xxxxxxxxxxxxxxxxxxxxxx"
+  client_id = "xxxxxxxxxxxxxxxxxxxxxx"
+  client_secret = "xxxxxxxxxxxxxxxxxxxxxx"
+  tenant_id = "xxxxxxxxxxxxxxxxxxxxxx"
+
+  features {}
 }
 
 
-resource "aws_instance" "web" {
-   ami   = "ami-0be2609ba883822ec"
-   instance_type = "t2.micro"
-
-   tags = {
-    Name = "HelloWorld"
+# Create a resource group
+resource "azurerm_resource_group" "example_rg" {
+  name     = "example-resources-RG"
+  location = "eastus"
+ 
+  tags = {
+    owner = "Amit Vashist"
    }
 }
