@@ -1,4 +1,4 @@
-my_loc = "eastus"
-my_rg_name = "prod"
+my_loc         = "eastus"
+my_rg_name     = "prod"
 admin_username = "admin_prod"
-admin_password =  "Password@1234567"
+admin_password = "Password@1234567"

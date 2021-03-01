@@ -2,10 +2,10 @@
 resource "azurerm_resource_group" "example_rg" {
   name     = "${var.my_rg_name}-resources-RG"
   location = var.my_loc
- 
+
   tags = {
     Owner = "AV"
-   }
+  }
 }
 
 # Network Configuation
@@ -24,7 +24,7 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_network_interface" "example_rg" {
-  count 		= var.my_vm_count
+  count               = var.my_vm_count
   name                = "${var.my_rg_name}-nic-${count.index}"
   location            = azurerm_resource_group.example_rg.location
   resource_group_name = azurerm_resource_group.example_rg.name
@@ -33,64 +33,64 @@ resource "azurerm_network_interface" "example_rg" {
     name                          = "testconfiguration1-${count.index}"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = element(azurerm_public_ip.examplepublicip.*.id, count.index)
+    public_ip_address_id          = element(azurerm_public_ip.examplepublicip.*.id, count.index)
   }
 }
 
-# Public IP Configuration 
+# Public IP Configuration
 #
 resource "azurerm_public_ip" "examplepublicip" {
-    count			= var.my_vm_count
-    name                         = "myPublicIP-${count.index}"
-    location                     = "eastus"
-    resource_group_name          = azurerm_resource_group.example_rg.name
-    allocation_method            = "Dynamic"
+  count               = var.my_vm_count
+  name                = "myPublicIP-${count.index}"
+  location            = "eastus"
+  resource_group_name = azurerm_resource_group.example_rg.name
+  allocation_method   = "Dynamic"
 }
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "examplensg" {
-    name                = "${var.my_rg_name}-nsg"
-    location            = "eastus"
-    resource_group_name = azurerm_resource_group.example_rg.name
+  name                = "${var.my_rg_name}-nsg"
+  location            = "eastus"
+  resource_group_name = azurerm_resource_group.example_rg.name
 
-    security_rule {
-        name                       = "SSH"
-        priority                   = 1001
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-    }
+  security_rule {
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 
-#    tags = {
-#        environment = "Terraform Demo"
-#    }
+  # tags = {
+  # environment = "Terraform Demo"
+  # }
 }
 
 # Virtual Machine
 
 resource "azurerm_virtual_machine" "example_rg" {
-  count 		= 2 
+  count                 = var.my_vm_count
   name                  = "${var.my_rg_name}-vm-${count.index}"
   location              = azurerm_resource_group.example_rg.location
   resource_group_name   = azurerm_resource_group.example_rg.name
-  network_interface_ids = element(azurerm_network_interface.example_rg.*.id, count.index)
+  network_interface_ids = [element(azurerm_network_interface.example_rg.*.id, count.index)]
   vm_size               = var.vm_size
 
- delete_os_disk_on_termination = true
- delete_data_disks_on_termination = true
+  delete_os_disk_on_termination    = true
+  delete_data_disks_on_termination = true
 
- storage_image_reference {
+  storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "16.04-LTS"
     version   = "latest"
   }
 
- storage_os_disk {
+  storage_os_disk {
     name              = "myosdisk-${count.index}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
@@ -110,13 +110,10 @@ resource "azurerm_virtual_machine" "example_rg" {
   }
 }
 
+output "pip" {
+ value = azurerm_public_ip.examplepublicip
+}
 
-#output "pip" {
-# value = azurerm_public_ip.examplepublicip
-#}
-
-
-#output "my_vm_public_IP" {
-# value = azurerm_public_ip.examplepublicip.*.ip_address
-#}
-
+output "my_vm_public_IP" {
+ value = azurerm_public_ip.examplepublicip.*.ip_address
+}
