@@ -40,7 +40,7 @@ locals {
 
     http = {
       name                       = "http"
-      priority                   = 1001
+      priority                   = 1005
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
