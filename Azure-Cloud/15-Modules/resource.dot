@@ -1,0 +1,81 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" [label = "module.compute.azurerm_virtual_machine.example_rg", shape = "box"]
+		"[root] module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] module.net.azurerm_network_interface.my_nic (expand)" [label = "module.net.azurerm_network_interface.my_nic", shape = "box"]
+		"[root] module.net.azurerm_network_security_group.examplensg (expand)" [label = "module.net.azurerm_network_security_group.examplensg", shape = "box"]
+		"[root] module.net.azurerm_network_security_rule.testrules (expand)" [label = "module.net.azurerm_network_security_rule.testrules", shape = "box"]
+		"[root] module.net.azurerm_public_ip.examplepublicip (expand)" [label = "module.net.azurerm_public_ip.examplepublicip", shape = "box"]
+		"[root] module.net.azurerm_resource_group.example_rg (expand)" [label = "module.net.azurerm_resource_group.example_rg", shape = "box"]
+		"[root] module.net.azurerm_subnet.internal (expand)" [label = "module.net.azurerm_subnet.internal", shape = "box"]
+		"[root] module.net.azurerm_virtual_network.example_rg (expand)" [label = "module.net.azurerm_virtual_network.example_rg", shape = "box"]
+		"[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.compute (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.net (close)"
+		"[root] module.compute (close)" -> "[root] module.compute.azurerm_virtual_machine.example_rg (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.admin_password (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.admin_username (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.managed_disk_type (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.my_loc (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.my_nic_id (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.my_rg_name (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.my_vm_count (expand)"
+		"[root] module.compute.azurerm_virtual_machine.example_rg (expand)" -> "[root] module.compute.var.vm_size (expand)"
+		"[root] module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] module.compute.azurerm_virtual_machine.example_rg (expand)"
+		"[root] module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"]" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.admin_password (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.admin_username (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.managed_disk_type (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.my_loc (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.my_nic_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.my_nic_id (expand)" -> "[root] module.net.output.my_nic (expand)"
+		"[root] module.compute.var.my_rg_name (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.my_vm_count (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.vm_size (expand)" -> "[root] module.compute (expand)"
+		"[root] module.net (close)" -> "[root] module.net.azurerm_network_security_rule.testrules (expand)"
+		"[root] module.net (close)" -> "[root] module.net.output.my_nic (expand)"
+		"[root] module.net (close)" -> "[root] module.net.output.my_rg_name (expand)"
+		"[root] module.net (close)" -> "[root] module.net.output.pub_ips (expand)"
+		"[root] module.net (close)" -> "[root] module.net.var.admin_password (expand)"
+		"[root] module.net (close)" -> "[root] module.net.var.admin_username (expand)"
+		"[root] module.net (close)" -> "[root] module.net.var.managed_disk_type (expand)"
+		"[root] module.net (close)" -> "[root] module.net.var.vm_size (expand)"
+		"[root] module.net.azurerm_network_interface.my_nic (expand)" -> "[root] module.net.azurerm_public_ip.examplepublicip (expand)"
+		"[root] module.net.azurerm_network_interface.my_nic (expand)" -> "[root] module.net.azurerm_subnet.internal (expand)"
+		"[root] module.net.azurerm_network_security_group.examplensg (expand)" -> "[root] module.net.azurerm_resource_group.example_rg (expand)"
+		"[root] module.net.azurerm_network_security_rule.testrules (expand)" -> "[root] module.net.azurerm_network_security_group.examplensg (expand)"
+		"[root] module.net.azurerm_network_security_rule.testrules (expand)" -> "[root] module.net.var.inbound_ports (expand)"
+		"[root] module.net.azurerm_public_ip.examplepublicip (expand)" -> "[root] module.net.azurerm_resource_group.example_rg (expand)"
+		"[root] module.net.azurerm_public_ip.examplepublicip (expand)" -> "[root] module.net.var.my_vm_count (expand)"
+		"[root] module.net.azurerm_resource_group.example_rg (expand)" -> "[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] module.net.azurerm_resource_group.example_rg (expand)" -> "[root] module.net.var.my_loc (expand)"
+		"[root] module.net.azurerm_resource_group.example_rg (expand)" -> "[root] module.net.var.my_rg_name (expand)"
+		"[root] module.net.azurerm_subnet.internal (expand)" -> "[root] module.net.azurerm_virtual_network.example_rg (expand)"
+		"[root] module.net.azurerm_subnet.internal (expand)" -> "[root] module.net.var.my_vpc_subnet_cidr (expand)"
+		"[root] module.net.azurerm_virtual_network.example_rg (expand)" -> "[root] module.net.azurerm_resource_group.example_rg (expand)"
+		"[root] module.net.azurerm_virtual_network.example_rg (expand)" -> "[root] module.net.var.my_vpc_cidr (expand)"
+		"[root] module.net.output.my_nic (expand)" -> "[root] module.net.azurerm_network_interface.my_nic (expand)"
+		"[root] module.net.output.my_rg_name (expand)" -> "[root] module.net.azurerm_resource_group.example_rg (expand)"
+		"[root] module.net.output.pub_ips (expand)" -> "[root] module.net.azurerm_public_ip.examplepublicip (expand)"
+		"[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] module.net.azurerm_network_interface.my_nic (expand)"
+		"[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] module.net.azurerm_network_security_rule.testrules (expand)"
+		"[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"]" -> "[root] module.net (expand)"
+		"[root] module.net.var.admin_password (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.admin_username (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.inbound_ports (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.managed_disk_type (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.my_loc (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.my_rg_name (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.my_vm_count (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.my_vpc_cidr (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.my_vpc_subnet_cidr (expand)" -> "[root] module.net (expand)"
+		"[root] module.net.var.vm_size (expand)" -> "[root] module.net (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] module.compute.provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+		"[root] root" -> "[root] module.net.provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+	}
+}
+

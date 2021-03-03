@@ -1,0 +1,20 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_resource_group.rg (expand)" [label = "azurerm_resource_group.rg", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] var.location" [label = "var.location", shape = "note"]
+		"[root] var.multi-region-deployment" [label = "var.multi-region-deployment", shape = "note"]
+		"[root] var.system" [label = "var.system", shape = "note"]
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] var.location"
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] var.multi-region-deployment"
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] var.system"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+	}
+}
+
